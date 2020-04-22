@@ -28,13 +28,17 @@ const all = async (req, res)=>{
 }*/
 
 //findByEmail
-const findByEmail = async(req,res)=>{
-    const {email, password} = req
+const findByEmail = async(req, res)=>{
+    const {email, password} = req.body
     const data = await usersSchema.findOne({email:email})
-    res.json(data)  
+    return res.json(data)  
     
 }
 
+/*const findByUser = async(req,res)=>{
+    const data = await usersSchema.findOne({email: 'marcelo@hotmail.com'})
+    return res.json(data)
+}*/
 
 /*
 
@@ -93,7 +97,8 @@ module.exports = {
     /*save,
     remove,*/
     //saveTeste
-    findByEmail
+    findByEmail,
+   // findByUser
 }
 
  

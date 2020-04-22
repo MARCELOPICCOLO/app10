@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,TextInput,Text, StyleSheet, TouchableOpacity, Alert,FlatList, ScrollView} from 'react-native'
+import {View,TextInput,Text, StyleSheet, TouchableOpacity, Alert,FlatList} from 'react-native'
 import api from '../api/api'
 import Buttons from '../components/Buttons'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -16,6 +16,7 @@ export default class LoginScreen extends React.Component {
             email: '',
             password: '',
             data:[],
+            logged: false,
         };
       }
 
@@ -32,33 +33,45 @@ export default class LoginScreen extends React.Component {
 
      async componentDidMount(){
 
-        /*const baseUrl='http://192.168.0.105:8081/api/wrdocs/'
+        /*const baseUrl='http://192.168.0.105:3000/api/wrdocs/'
         const user = await axios.get(baseUrl)
         this.setState({data: user.data})*/
 
         /*const baseUrl='http://192.168.0.105:8081/api/wrdocs'
         const user = await axios.get(baseUrl)
         this.setState({data: user.data})*/
-       
 
-          
+       /* const user = await axios.get('http://192.168.0.105:3000/api/wrdocs/user')
+        this.setState({user:user.data})*/
+
+       this.setState({data: this.login()})
+        
+        
       }
 
-
-      
 
       login = async() =>{
 
-       // if(this.state.email && this.state.password){
-          
-          const baseUrl='http://192.168.0.105:8081/api/wrdocs/login'
-          const user = await axios.post(baseUrl,{email: this.state.email, password: this.state.password})
-          this.setState({data: user.data})
-          
+        // if(this.state.email && this.state.password){
          
-       // }
-       
-      }
+           const baseUrl='http://192.168.0.105:3000/api/wrdocs/login'
+           const user = await axios.post(baseUrl,{email: this.state.email, password: this.state.password})
+        
+             this.setState({data: user.data})
+             if(user.data){
+              Alert.alert('user logged') 
+              return  () => this.props.navigation.navigate('Register')
+             }
+             else{
+              Alert.alert('user is not logged')
+            
+             }
+ 
+        // }
+     
+       }
+
+      
     
       /*save = async () =>{
           await api.post('/',this.state.car).then(()=>{
@@ -77,7 +90,7 @@ export default class LoginScreen extends React.Component {
       return (
           
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#fff'}}> 
-            <ScrollView>
+         
                 <View style={{flexDirection:'row', justifyContent: 'center', alignItems: 'center', bottom: 2}}>
                     <Icon name='book' size={40} color={'#008080'} style={{margin:2}}/>
                     <Text style={{fontSize:24, marginLeft: 10, fontWeight: 'bold', color:'#008080'}}>WRDOCS</Text>
@@ -126,13 +139,7 @@ export default class LoginScreen extends React.Component {
                        <Text style={styles.TextRegister}>Register</Text>  
                   </View>  
                 </TouchableOpacity>  
-
-                <FlatList
-                  data={this.state.data}
-           
-                  renderItem={({item}) => <Text>{item.email}</Text>}
-                />
-                </ScrollView>
+               
             </View>
          
           

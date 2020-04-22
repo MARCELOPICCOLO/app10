@@ -9,6 +9,7 @@ router.get('/', all)
 //router.delete('/:id', remove)*/
 //router.get('/saveTeste',saveTeste)
 router.post('/login',findByEmail)
+//router.get('/user',findByUser)
 
 
 module.exports = router
