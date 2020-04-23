@@ -32,6 +32,20 @@ export default StyleSheet.create({
         fontSize:15, 
         color:'#008080', 
         borderBottomColor:'#008080'
+      },
+      button:{
+        width: 200,
+        height: 50,
+        marginTop: 10,
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10
+    },
+    textButton:{
+        fontSize: 18,
+        color: '#fff',
+        fontWeight: 'bold',  
       }
 
 })

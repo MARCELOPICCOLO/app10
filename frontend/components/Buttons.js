@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 
 export default class Buttons extends React.Component{
     render(){
@@ -9,7 +9,7 @@ export default class Buttons extends React.Component{
                     <View style={[styles.button,{backgroundColor:this.props.color}]}>
                         <Text style={styles.textButton}>{this.props.title}</Text>
                     </View>
-                </TouchableOpacity>
+                  </TouchableOpacity>
             </View>        
         )
     }

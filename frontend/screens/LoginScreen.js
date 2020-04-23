@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,TextInput,Text, StyleSheet, TouchableOpacity, Alert,FlatList} from 'react-native'
+import {View,TextInput,Text,TouchableOpacity, Alert, Button } from 'react-native'
 import api from '../api/api'
 import Buttons from '../components/Buttons'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -44,34 +44,32 @@ export default class LoginScreen extends React.Component {
        /* const user = await axios.get('http://192.168.0.105:3000/api/wrdocs/user')
         this.setState({user:user.data})*/
 
-       this.setState({data: this.login()})
+      // this.setState({data: this.login()})
+
+
         
         
+      }
+
+      isLogged = () =>{
+        this.setState({logged : !this.state.logged})
+        Alert.alert(''+this.state.logged)
       }
 
 
       login = async() =>{
 
         // if(this.state.email && this.state.password){
-         
            const baseUrl='http://192.168.0.105:3000/api/wrdocs/login'
            const user = await axios.post(baseUrl,{email: this.state.email, password: this.state.password})
-        
-             this.setState({data: user.data})
-             if(user.data){
-              Alert.alert('user logged') 
-              return  () => this.props.navigation.navigate('Register')
-             }
-             else{
-              Alert.alert('user is not logged')
-            
-             }
- 
+          if(user.data){
+            Alert.alert('usuario logged')
+           this.props.navigation.navigate('Home')
+          }
         // }
-     
+   
        }
-
-      
+    
     
       /*save = async () =>{
           await api.post('/',this.state.car).then(()=>{
@@ -131,9 +129,16 @@ export default class LoginScreen extends React.Component {
                     </View>
        
                 </View>
+               
                 <View style={{marginTop:35}}>
-                    <Buttons color='#008080' title='Sign in' move={this.login}/>
+                      <TouchableOpacity onPress={this.login}>
+                          <View style={{width:200,height:50, backgroundColor:'#008080', alignItems:'center', justifyContent:'center', borderRadius:50}}>
+                                <Text style={{color:'#fff', fontSize:17, fontWeight:'bold'}}>Sign in</Text>
+                          </View>
+
+                      </TouchableOpacity>                              
                 </View>
+               
                 <TouchableOpacity onPress={()=>this.props.navigation.navigate('Register')}>
                   <View>
                        <Text style={styles.TextRegister}>Register</Text>  
